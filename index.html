@@ -1290,31 +1290,6 @@ exports.init = init;
             }
 
             /**
-             * Register something happened - this uses a simple Supabase function to implement a counter, and allows to drop
-             * google analytics. We don't store any personal data or IP.
-             *
-             * @param {string} action
-             */
-            function trackEvent(action) {
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "https://zlgpaemmniviswibzuwt.supabase.co/rest/v1/rpc/increment_analytics", true);
-                xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-                xhr.setRequestHeader(
-                    "apikey",
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsZ3BhZW1tbml2aXN3aWJ6dXd0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjkxMjM0OTcsImV4cCI6MTk4NDY5OTQ5N30.wNoVDHG7F6INx-IPotMs3fL1nudfaF2qvQDgG-1PhNI"
-                );
-                xhr.setRequestHeader(
-                    "Authorization",
-                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsZ3BhZW1tbml2aXN3aWJ6dXd0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjkxMjM0OTcsImV4cCI6MTk4NDY5OTQ5N30.wNoVDHG7F6INx-IPotMs3fL1nudfaF2qvQDgG-1PhNI"
-                );
-                xhr.send(
-                    JSON.stringify({
-                        action_input: action,
-                    })
-                );
-            }
-
-            /**
              * Fill the password prompt template with data provided.
              * @param data
              */
@@ -1335,7 +1310,6 @@ exports.init = init;
 
             // register page load
             window.onload = function () {
-                trackEvent("show_index");
             };
 
             /**
@@ -1343,8 +1317,6 @@ exports.init = init;
              */
             document.getElementById("encrypt_form").addEventListener("submit", async function (e) {
                 e.preventDefault();
-
-                trackEvent("generate_encrypted");
 
                 // update instruction textarea value with CKEDITOR content
                 // (see https://stackoverflow.com/questions/3147670/ckeditor-update-textarea)
@@ -1409,11 +1381,6 @@ exports.init = init;
              * Browser specific download code.
              */
             document.getElementById("download-link").addEventListener("click", function (e) {
-                // only register the click event if there is actually a generated file
-                if (htmlToDownload) {
-                    trackEvent("download_encrypted");
-                }
-
                 const isIE = navigator.userAgent.indexOf("MSIE") !== -1 || !!document.documentMode === true; // >= 10
                 const isEdge = navigator.userAgent.indexOf("Edge") !== -1;
 
