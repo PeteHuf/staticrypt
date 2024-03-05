@@ -28,7 +28,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "bash ./scripts/build.sh"
+    "build": "scripts\\build.bat"
   },
   "repository": {
     "type": "git",

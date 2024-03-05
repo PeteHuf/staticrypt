@@ -186,7 +186,8 @@
   const exports = {};
   const cryptoEngine = ((function(){
   const exports = {};
-  const { subtle } = crypto;
+  const crypto = typeof window === "undefined" ? require("node:crypto").webcrypto : window.crypto;
+const { subtle } = crypto;
 
 const IV_BITS = 16 * 8;
 const HEX_BITS = 4;
@@ -780,7 +781,7 @@ exports.init = init;
 })());
             const templateError = "Bad password!",
                 isRememberEnabled = true,
-                staticryptConfig = {"staticryptEncryptedMsgUniqueVariableName":"0aebc39457f31c757cef31f0fa9b2fb0cb4ebe9845a3690ab119002ae21ce5b7b200ded81ad6da56d0f6b98df029102c0913440135cd3f75b84f481ee32aab034c0bb3055168d6c49afd4b59e7189b539b573e6effbd29e403ef3234ab8bd1c2de1cd97a4f94e88c4d632f8648e9d99c7d988723634ce805d021d1d017c3e125e98e58914db31c4cca5a0f6b1f4464d284a48548a1eb5edad8f910aea4d2beee6b811785b556c7ec67c48112f551aa860614faf34887267c6119feda894b3ed8","isRememberEnabled":true,"rememberDurationInDays":0,"staticryptSaltUniqueVariableName":"b93bbaf35459951c47721d1f3eaeb5b9"};
+                staticryptConfig = {"staticryptEncryptedMsgUniqueVariableName":"07f0347dfa1e55c02203a7849396a28298bc1ea7a129d4a4d7073d675f81a71472556029088231beba9d17fc94ca222ea468ab338d3b7c8bbb2faa1b351f013e364fa3baa40a0722d0b23844dc87f52c7db802dfeb571b5859aa824d446ce0e72a03e8108e578309903cd716582f61a94b256c63e5269a60f7b4a124cd04ee3d3b85792bcd5bccdd06f48bbf659194bf208c94149efee2fb3fa3bdba9b3ae3ff2ceb4427872e09fe045fe149f29394275ab8da61643263965b2e40b63fc5598d","isRememberEnabled":true,"rememberDurationInDays":0,"staticryptSaltUniqueVariableName":"b93bbaf35459951c47721d1f3eaeb5b9"};
 
             // you can edit these values to customize some of the behavior of StatiCrypt
             const templateConfig = {

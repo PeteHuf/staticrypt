@@ -272,7 +272,8 @@
         <script id="cryptoEngine">
             window.cryptoEngine = ((function(){
   const exports = {};
-  const { subtle } = crypto;
+  const crypto = typeof window === "undefined" ? require("node:crypto").webcrypto : window.crypto;
+const { subtle } = crypto;
 
 const IV_BITS = 16 * 8;
 const HEX_BITS = 4;
@@ -677,7 +678,8 @@ exports.renderTemplate = renderTemplate;
   const exports = {};
   const cryptoEngine = ((function(){
   const exports = {};
-  const { subtle } = crypto;
+  const crypto = typeof window === "undefined" ? require("node:crypto").webcrypto : window.crypto;
+const { subtle } = crypto;
 
 const IV_BITS = 16 * 8;
 const HEX_BITS = 4;
